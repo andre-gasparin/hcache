@@ -1,11 +1,11 @@
 # Criando Cache em arquivos
 > Uma forma simples, fácil e eficiente. Quando você possui algum bloco na dashboard, ou alguma informação que consuma muito recurso na requisição e varios usuários tem acesso a mesma informação, você cria um arquivo de cache para evitar a requisição por alguns minutos.
+> Ideal para utilizar em micro-frameworks e também no adianti.
 <p align="center">
-<img src="https://img.shields.io/badge/VERSÃO-1.0-green">
+<img src="https://img.shields.io/badge/VERSÃO-1.0.1-green">
 <img src="https://img.shields.io/badge/Licença-GNU 3.0-success">
 <img src="https://img.shields.io/badge/PHP->7.2-blueviolet">
 </p>
-
 
 
 ## Instalação
@@ -36,26 +36,35 @@ Depois utilize a classe, exemplo:
 
 ```html
 <?php 
+//Instanciamos a classe com a quantidade de segundos que a informação ficara no cache. (no caso 20)
 $cache  = new HCache(20);
 
-if(!$cache->existe('eadParametros')){  
-    //Consultar no banco e colocar o conteúdo
-    $conteudo = 'Hora2 '.date('H:i:s');
-	
-    //
-    $cache->criar('eadParametros', $conteudo);
+//Criamos um cache qualquer 
+//Verifica se o cache existe e o prazo para utiliza-lo, caso não exista criamos
+if(!$cache->existe('NomedoCache')){  
+    //Criamos o conteúdo do cache
+    $conteudo = 'Data e Hora atual: '.date('H:i:s');
+    //Criamos o cache
+    $cache->criar('NomedoCache', $conteudo);
 }
 else
 {
-    $conteudo = $cache->ler('eadParametros');
+    //caso ele exista e esteja dentro da validade nós trazemos o conteúdo
+    $conteudo = $cache->ler('NomedoCache');
 }
-
-echo 'Atualizado à '.$cache->minutosUltimaAtualizacao('eadParametros').' Minutos';
-
+//Exibir conteúdo do cache
+echo '<br> Conteúdo:<br>';
 echo $conteudo;
+
+//Algumas funções para verificar a data de criação/atualização daquele cache, caso queira exibir a data da informação para o usuário
+
+echo 'Atualizado à '.$cache->minutosUltimaAtualizacao('NomedoCache').' Minutos <br>';
+echo 'Atualizado na data '.$cache->dataUltimaAtualizacao('NomedoCache').' <br>';
+echo 'Atualizado às '.$cache->horaUltimaAtualizacao('NomedoCache').' horas <br>';
+
+
 ?>
 ```
-
 
 ## Configuração para Desenvolvimento
 
@@ -70,7 +79,8 @@ Caso queira implementar algo no sistema, ficaremos felizes com sua participaçã
 
 * 1.0.0
     * Projeto criado
-
+* 1.0.1 
+    * Correções na classe 	
 
 ## Meta
 
