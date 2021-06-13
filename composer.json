@@ -1,0 +1,18 @@
+{
+    "name": "andregasparin/hcache",
+    "description": "Gerador simples de cache em arquivos.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "André Gasparin",
+            "email": "andre.gasparin@hotmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "AndreGasparin\\HCache\\": "src"
+        }
+    }
+}
